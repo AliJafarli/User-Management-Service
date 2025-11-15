@@ -1,4 +1,4 @@
-FROM gradle:8.3.1-jdk20 AS builder
+FROM gradle:8.3-jdk20 AS builder
 WORKDIR /app
 COPY . .
 RUN gradle clean build --no-daemon
