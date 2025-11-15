@@ -8,7 +8,9 @@ import java.time.OffsetDateTime;
 @Table(name = "users")
 @Setter
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
