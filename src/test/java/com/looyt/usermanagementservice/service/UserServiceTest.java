@@ -1,7 +1,9 @@
 package com.looyt.usermanagementservice.service;
 
 
+import com.looyt.usermanagementservice.dto.PageResponse;
 import com.looyt.usermanagementservice.dto.UserRequest;
+import com.looyt.usermanagementservice.dto.UserResponse;
 import com.looyt.usermanagementservice.exception.NotFoundException;
 import com.looyt.usermanagementservice.mapper.UserMapper;
 import com.looyt.usermanagementservice.model.User;
@@ -35,6 +37,7 @@ class UserServiceTest {
 
     private User user;
     private UserRequest request;
+    private UserResponse response;
 
     @BeforeEach
     void setup() {
@@ -46,6 +49,16 @@ class UserServiceTest {
                 .phone("123456")
                 .role(UserRole.USER)
                 .build();
+
+        response = UserResponse.builder()
+                .id(1L)
+                .name("John")
+                .email("john@example.com")
+                .phone("123456")
+                .role(UserRole.USER)
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .build();
     }
 
     @Test
@@ -53,7 +66,7 @@ class UserServiceTest {
         when(mapper.toEntity(request)).thenReturn(user);
         when(repo.save(user)).thenReturn(user);
 
-        User result = service.create(request);
+        UserResponse result = service.create(request);
 
         assertEquals("John", result.getName());
         verify(repo, times(1)).save(user);
@@ -62,24 +75,28 @@ class UserServiceTest {
     @Test
     void getById_found() {
         when(repo.findById(1L)).thenReturn(Optional.of(user));
-        User result = service.getById(1L);
+        UserResponse result = service.getByIdResponse(1L);
         assertEquals("John", result.getName());
     }
 
     @Test
     void getById_notFound() {
         when(repo.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(NotFoundException.class, () -> service.getById(1L));
+        assertThrows(NotFoundException.class, () -> service.getByIdResponse(1L));
     }
 
     @Test
     void listPaged_success() {
         Page<User> page = new PageImpl<>(List.of(user));
         when(repo.findAll(PageRequest.of(0, 10, Sort.by("createdAt").descending()))).thenReturn(page);
+        when(mapper.toResponse(user)).thenReturn(response);
 
-        Page<User> result = service.listPaged(0, 10);
-        assertEquals(1, result.getContent().size());
+        PageResponse<UserResponse> result = service.listPagedResponse(0, 10);
+
+        assertEquals(1, result.getItems().size());
+        assertEquals("John", result.getItems().get(0).getName());
     }
+
 
     @Test
     void update_success() {
@@ -87,7 +104,7 @@ class UserServiceTest {
         doNothing().when(mapper).updateEntityFromRequest(request, user);
         when(repo.save(user)).thenReturn(user);
 
-        User result = service.update(1L, request);
+        UserResponse result = service.update(1L, request);
         assertEquals("John", result.getName());
     }
 

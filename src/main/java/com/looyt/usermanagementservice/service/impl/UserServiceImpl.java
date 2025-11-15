@@ -1,19 +1,23 @@
 package com.looyt.usermanagementservice.service.impl;
 
 import com.looyt.usermanagementservice.dto.UserRequest;
+import com.looyt.usermanagementservice.dto.UserResponse;
+import com.looyt.usermanagementservice.dto.PageResponse;
 import com.looyt.usermanagementservice.exception.NotFoundException;
 import com.looyt.usermanagementservice.mapper.UserMapper;
 import com.looyt.usermanagementservice.model.User;
 import com.looyt.usermanagementservice.repository.UserRepository;
 import com.looyt.usermanagementservice.service.UserService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
-@RequiredArgsConstructor
 @Transactional
 @Slf4j
 public class UserServiceImpl implements UserService {
@@ -21,25 +25,47 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repo;
     private final UserMapper mapper;
 
-    public User create(UserRequest req) {
+    public UserServiceImpl(UserRepository repo,
+                           @Qualifier("userMapperImpl") UserMapper mapper) {
+        this.repo = repo;
+        this.mapper = mapper;
+    }
+
+    public UserResponse create(UserRequest req) {
         User user = mapper.toEntity(req);
-        return repo.save(user);
+        user = repo.save(user);
+        return mapper.toResponse(user);
     }
 
-    public User getById(Long id) {
-        return repo.findById(id)
+    public UserResponse getByIdResponse(Long id) {
+        User user = repo.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found: " + id));
+        return mapper.toResponse(user);
     }
 
-    public Page<User> listPaged(int page, int size) {
+    public PageResponse<UserResponse> listPagedResponse(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        return repo.findAll(pageable);
+        Page<User> paged = repo.findAll(pageable);
+
+        List<UserResponse> items = paged.getContent().stream()
+                .map(mapper::toResponse)
+                .collect(Collectors.toList());
+
+        return PageResponse.<UserResponse>builder()
+                .items(items)
+                .page(paged.getNumber())
+                .size(paged.getSize())
+                .totalPages(paged.getTotalPages())
+                .totalItems(paged.getTotalElements())
+                .build();
     }
 
-    public User update(Long id, UserRequest req) {
-        User user = getById(id);
+    public UserResponse update(Long id, UserRequest req) {
+        User user = repo.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found: " + id));
         mapper.updateEntityFromRequest(req, user);
-        return repo.save(user);
+        user = repo.save(user);
+        return mapper.toResponse(user);
     }
 
     public void delete(Long id) {
@@ -48,4 +74,3 @@ public class UserServiceImpl implements UserService {
         repo.deleteById(id);
     }
 }
-
