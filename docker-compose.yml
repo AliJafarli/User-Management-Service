@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_HOST: dpg-d4dk1p7pm1nc73dclm60-a
+      DB_HOST: dpg-d4dk1p7pm1nc73dclm60-a.render.com
       DB_PORT: 5432
       DB_NAME: ums_db_erwo
       DB_USER: ums_db_erwo_user
