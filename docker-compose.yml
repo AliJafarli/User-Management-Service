@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_HOST: dpg-d4ca3nili9vc73bsphhg-a
+      DB_HOST: dpg-d4dk1p7pm1nc73dclm60-a
       DB_PORT: 5432
-      DB_NAME: ums_db_lt5k
-      DB_USER: ums_db_lt5k_user
-      DB_PASSWORD: lo1z61KGqguio7qttQtwhxfJXNFRl3CT
+      DB_NAME: ums_db_erwo
+      DB_USER: ums_db_erwo_user
+      DB_PASSWORD: k2GH66bqhv9GFqG9Hk981rCcIPqjgrgK
