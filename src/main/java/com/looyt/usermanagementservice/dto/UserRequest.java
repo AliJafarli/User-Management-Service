@@ -9,15 +9,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
-    @NotBlank
-    @Size(max = 200)
-    private String name;
+    @NotBlank(message = "Username cannot be empty")
+    @Size(max = 30)
+    private String username;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Password cannot be empty")
+    @Size(max = 50)
+    private String password;
+
+    @NotBlank(message = "Email cannot be empty")
+    @Size(max = 50)
     private String email;
 
-    @Size(max = 50)
+    @Size(max = 20)
     private String phone;
 
     private UserRole role;

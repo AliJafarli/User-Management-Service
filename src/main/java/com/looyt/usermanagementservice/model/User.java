@@ -1,6 +1,7 @@
 package com.looyt.usermanagementservice.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import java.time.OffsetDateTime;
 
@@ -17,13 +18,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 200)
-    private String name;
+    @Size(max = 30)
+    @Column(nullable = false, length = 30)
+    private String username;
 
-    @Column(nullable = false, unique = true, length = 200)
+    @Size(max = 80)
+    @Column(nullable = false, length = 80)
+    private String password;
+
+    @Size(max = 50)
+    @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(length = 50)
+    @Size(max = 20)
+    @Column(length = 20)
     private String phone;
 
     @Enumerated(EnumType.STRING)
@@ -38,8 +46,9 @@ public class User {
 
     @PrePersist
     public void prePersist() {
-        this.createdAt = OffsetDateTime.now();
-        this.updatedAt = OffsetDateTime.now();
+        OffsetDateTime now = OffsetDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
         if (role == null) role = UserRole.USER;
     }
 

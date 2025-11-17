@@ -17,6 +17,7 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "role", expression = "java(request.getRole() != null ? request.getRole() : com.looyt.usermanagementservice.model.UserRole.USER)")
     User toEntity(UserRequest request);
 
     UserResponse toResponse(User user);
@@ -24,6 +25,8 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    void updateEntityFromRequest(UserRequest request, @MappingTarget User user);
+    @Mapping(target = "role", expression = "java(request.getRole() != null ? request.getRole() : user.getRole())")
+    void updateUser(UserRequest request, @MappingTarget User user);
 }
+
 
