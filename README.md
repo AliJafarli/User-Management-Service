@@ -132,13 +132,13 @@ _No headers or body required._
 ### Create User
 **Method:** POST  
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users`  
+
 **Headers:**  
 Content-Type: application/json
 X-User-Id: 3 or 4 (who has role ADMIN)
 
 **Body (raw JSON):**
 
-json
 {
   "username": "john_doe",
   "password": "securePass123",
@@ -146,14 +146,18 @@ json
   "phone": "1234567890",
   "role": "USER"
 }
-Update User
-Method: PUT
-URL: `https://user-management-service-rgfs.onrender.com/api/users/6`
-Headers:
 
+---
+
+### Update User
+**Method:** PUT
+**URL:** `https://user-management-service-rgfs.onrender.com/api/users/6`
+
+**Headers:**
 Content-Type: application/json
 X-User-Id: 3 or 4 (who has role ADMIN)
-Body (raw JSON):
+
+**Body (raw JSON):**
 
 {
   "username": "john_updated",
@@ -162,16 +166,25 @@ Body (raw JSON):
   "phone": "0987654321",
   "role": "ADMIN"
 }
-Delete User
-Method: DELETE
-URL: `https://user-management-service-rgfs.onrender.com/api/users/1`
-Headers:
+
+---
+
+### Delete User
+**Method:** DELETE
+**URL:** `https://user-management-service-rgfs.onrender.com/api/users/1`
+
+**Headers:**
 X-User-Id: 3
-Health Check
-Method: GET
+
+---
+
+### Health Check
+**Method:** GET
 URL: `https://user-management-service-rgfs.onrender.com/api/users/health`
 
 No headers or body required.
+
+---
 
 Notes
 POST, PUT, and DELETE endpoints require the X-User-Id header to indicate the current user performing the action.
