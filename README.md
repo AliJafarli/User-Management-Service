@@ -148,6 +148,7 @@ Base URL: `https://user-management-service-rgfs.onrender.com`
 
 ### Get All Users
 **Method:** GET  
+
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users`  
 
 _No headers or body required._
@@ -156,6 +157,7 @@ _No headers or body required._
 
 ### Get User by ID
 **Method:** GET  
+
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users/6`  
 
 _No headers or body required._
@@ -164,6 +166,7 @@ _No headers or body required._
 
 ### Create User
 **Method:** POST  
+
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users`  
 
 **Headers:**  X-User-Id: 3 or 4 (who has role ADMIN)
