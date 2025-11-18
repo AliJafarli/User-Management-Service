@@ -7,7 +7,6 @@ A Spring Boot REST API service for managing users. The service supports CRUD ope
 ## Table of Contents
 - [Technologies](#technologies)
 - [Setup](#setup)
-- [Running the Application](#running-the-application)
 - [Project Structure](#project-structure)
 - [Admins](#admins)
 - [API Endpoints](#api-endpoints)
@@ -35,14 +34,6 @@ The deployment uses the provided `Dockerfile`.
 
 **Render deployment URL:**  
 `https://user-management-service-rgfs.onrender.com`
-
----
-
-## Running the Application
-
-The application is running in a Docker container on Render. All endpoints are available via the base URL:
-
-https://user-management-service-rgfs.onrender.com/api/users
 
 ---
 
