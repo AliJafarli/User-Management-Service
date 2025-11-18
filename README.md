@@ -166,9 +166,7 @@ _No headers or body required._
 **Method:** POST  
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users`  
 
-**Headers:**  
-Content-Type: application/json
-X-User-Id: 3 or 4 (who has role ADMIN)
+**Headers:**  X-User-Id: 3 or 4 (who has role ADMIN)
 
 **Body (raw JSON):**
 
@@ -184,10 +182,10 @@ X-User-Id: 3 or 4 (who has role ADMIN)
 
 ### Update User
 **Method:** PUT
+
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users/6`
 
 **Headers:**
-Content-Type: application/json
 X-User-Id: 3 or 4 (who has role ADMIN)
 
 **Body (raw JSON):**
@@ -204,16 +202,18 @@ X-User-Id: 3 or 4 (who has role ADMIN)
 
 ### Delete User
 **Method:** DELETE
+
 **URL:** `https://user-management-service-rgfs.onrender.com/api/users/1`
 
 **Headers:**
-X-User-Id: 3
+X-User-Id: 3 or 4 (who has role ADMIN)
 
 ---
 
 ### Health Check
 **Method:** GET
-URL: `https://user-management-service-rgfs.onrender.com/api/users/health`
+
+**URL:** `https://user-management-service-rgfs.onrender.com/api/users/health`
 
 No headers or body required.
 
