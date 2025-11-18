@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_HOST: dpg-d4dk1p7pm1nc73dclm60-a.frankfurt-postgres.render.com
-      DB_PORT: 5432
-      DB_NAME: ums_db_erwo
-      DB_USER: ums_db_erwo_user
-      DB_PASSWORD: k2GH66bqhv9GFqG9Hk981rCcIPqjgrgK
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
