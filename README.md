@@ -49,38 +49,71 @@ https://user-management-service-rgfs.onrender.com/api/users
 ## Project Structure (simplified)
 
 User Management Service
+
 ├─ src/main/java/com/looyt/usermanagementservice
+
 │ ├─ controller
+
 │ │ └─ UserController.java
+
 │ ├─ service
+
 │ │ ├─ UserService.java
+
 │ │ └─ impl/UserServiceImpl.java
+
 │ ├─ model
+
 │ │ ├─ User.java
+
 │ │ └─ UserRole.java
+
 │ ├─ dto
+
 │ │ ├─ UserRequest.java
+
 │ │ ├─ UserResponse.java
+
 │ │ └─ PageResponse.java
+
 │ ├─ repository
+
 │ │ └─ UserRepository.java
+
 │ ├─ mapper
+
 │ │ └─ UserMapper.java
+
 │ ├─ exception
+
 │ │ ├─ NotFoundException.java
+
 │ │ ├─ AccessDeniedException.java
+
 │ │ └─ DataExistException.java
+
 │ ├─ advice
+
 │ │ └─ GlobalExceptionHandler.java
+
 │ └─ util
+
 │ └─ RoleChecker.java
+
 ├─ src/main/resources/db/changelog
+
 │ ├─ db.changelog-master.yml
+
 │ └─ changes
+
 │ └─ V1__create_users_table.yml
+
 ├─ Dockerfile
+
 ├─ docker-compose.yml
+
 ├─ build.gradle
+
 └─ README.md
 
 ---
